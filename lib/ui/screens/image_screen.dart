@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 import 'package:hp_wallpaper/model/image_model.dart';
 import 'package:share/share.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class ImageScreen extends StatefulWidget {
   final Hit image;
@@ -13,6 +14,7 @@ class ImageScreen extends StatefulWidget {
 
 class _ImageScreenState extends State<ImageScreen> with SingleTickerProviderStateMixin{
   AnimationController _controller;
+  static const platform = const MethodChannel('com.example.hp_wallpaper/wallpaper');
   
   @override
   void initState() {
@@ -47,35 +49,44 @@ class _ImageScreenState extends State<ImageScreen> with SingleTickerProviderStat
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600
                 )),
-                Row(
-                  children: [
-                    Icon(Icons.home, color: Colors.white,),
-                    SizedBox(width: 10.0,),
-                    Text('Home Screen', style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
-                    ))
-                  ],
+                GestureDetector(
+                  onTap: () => _setWallpaper(1),
+                  child: Row(
+                    children: [
+                      Icon(Icons.home, color: Colors.white,),
+                      SizedBox(width: 10.0,),
+                      Text('Home Screen', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                      ))
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.lock, color: Colors.white,),
-                    SizedBox(width: 10.0,),
-                    Text('Lock Screen', style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
-                    ))
-                  ],
+                GestureDetector(
+                  onTap: () => _setWallpaper(2),
+                  child: Row(
+                    children: [
+                      Icon(Icons.lock, color: Colors.white,),
+                      SizedBox(width: 10.0,),
+                      Text('Lock Screen', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                      ))
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.phone_android, color: Colors.white,),
-                    SizedBox(width: 10.0,),
-                    Text('Both', style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
-                    ))
-                  ],
+                GestureDetector(
+                  onTap: () => _setWallpaper(3),
+                  child: Row(
+                    children: [
+                      Icon(Icons.phone_android, color: Colors.white,),
+                      SizedBox(width: 10.0,),
+                      Text('Both', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                      ))
+                    ],
+                  ),
                 )
               ],
             ),
@@ -84,6 +95,24 @@ class _ImageScreenState extends State<ImageScreen> with SingleTickerProviderStat
       }
     );
   }
+
+  Future<void> _setWallpaper(int wallpaperType) async {
+    var file = await DefaultCacheManager().getSingleFile(widget.image.largeImageURL);
+    print(file.path.toString());
+    try {
+      final int result = await platform.invokeMethod('setWallpaper', [file.path, wallpaperType]);
+      print('Wallpaper updated.....$result');
+
+    }on PlatformException catch(e) {
+      print("Failed to set wallpaper : '${e.message}'.");
+    }
+    // Fluttertoast.showToast(
+    //   msg: 'Wallpaper set successfully..',
+    //   toastLength: Toast.LENGTH_SHORT,
+    //   gravity: ToastGravity.BOTTOM,
+    // );
+    Navigator.pop(context);
+  }  
 
   @override
   Widget build(BuildContext context) {
@@ -219,11 +248,11 @@ class _ImageScreenState extends State<ImageScreen> with SingleTickerProviderStat
                                   icon: Icon(Icons.file_download,
                                   color: Colors.white,),
                                   onPressed: () {
-                                    Fluttertoast.showToast(
-                                      msg: 'Downloading image..',
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM
-                                    );
+                                    // Fluttertoast.showToast(
+                                    //   msg: 'Downloading image..',
+                                    //   toastLength: Toast.LENGTH_SHORT,
+                                    //   gravity: ToastGravity.BOTTOM
+                                    // );
                                   },
                                 )
                               ],

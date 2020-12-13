@@ -20,7 +20,7 @@ class ImageItem extends StatelessWidget {
       child: Material(
         elevation: 0,
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        color: Colors.grey,
+        color: Color(0xFF333333),
         child: Hero(
           tag: image.webformatURL,
           child: ClipRRect(

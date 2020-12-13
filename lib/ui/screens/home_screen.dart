@@ -34,9 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-
-            },
+            onPressed: () {},
           )
         ],
       ),
