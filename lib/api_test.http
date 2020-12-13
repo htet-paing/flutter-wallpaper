@@ -1,0 +1,20 @@
+GET https://reqres.in/api/users
+
+###
+
+POST https://reqres.in/api/users
+Content-Type: application/json
+
+{
+    "first_name": "Bob"
+}
+
+###
+
+# GET https://pixabay.com/api/?key=19339177-ad7fb872af71679cfdc74334c&editors_choice=true&orientation=vertical&image_type=illustration&category=music
+GET  https://pixabay.com/api/?key=19339177-ad7fb872af71679cfdc74334c&editors_choice=true&orientation=vertical&image_type=illustration
+
+
+###
+
+GET https://api.unsplash.com/collections/featured?page=1&client_id=3b1df5538a261c90edc00b184736b38859226d215482386c9b3fc00c5ec094a2
