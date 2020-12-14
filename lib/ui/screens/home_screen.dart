@@ -24,10 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.black,
-        title: Text('Pixabay',style: TextStyle(
+        title: Text('HPwallpaper',style: TextStyle(
           color: Colors.white,
-          fontSize: 26.0,
-          letterSpacing: 0.0,
+          fontSize: 24.0,
+          letterSpacing: 0.3,
           fontWeight: FontWeight.bold
         ),),
         centerTitle: true,
