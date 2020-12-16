@@ -1,7 +1,11 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hp_wallpaper/model/image_model.dart';
+import 'package:image_downloader/image_downloader.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:share/share.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -106,13 +110,49 @@ class _ImageScreenState extends State<ImageScreen> with SingleTickerProviderStat
     }on PlatformException catch(e) {
       print("Failed to set wallpaper : '${e.message}'.");
     }
-    // Fluttertoast.showToast(
-    //   msg: 'Wallpaper set successfully..',
-    //   toastLength: Toast.LENGTH_SHORT,
-    //   gravity: ToastGravity.BOTTOM,
-    // );
+    showToast('Wallpaper set successfully..');
     Navigator.pop(context);
   }  
+
+  void downloadImage() async {
+    try { 
+      PermissionStatus status = await Permission.storage.status;
+      if (status.isGranted) {
+        try {
+          showToast('Check the notification to see progress.');
+          var imageId = await ImageDownloader.downloadImage(
+            widget.image.largeImageURL,
+            destination: AndroidDestinationType.directoryDownloads
+          );
+          if (imageId == null) {
+            return;
+          }
+        }on PlatformException catch(error) {
+          print(error);
+        }
+      }else {
+        askForPermission();
+      }
+    }catch (e) {
+      print(e);
+    }
+  }
+
+  void askForPermission() async{
+    if (await Permission.storage.request().isGranted) {
+      downloadImage();
+    }else {
+      showToast('Please grant storage permission');
+    }
+  }
+
+  void showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -247,13 +287,7 @@ class _ImageScreenState extends State<ImageScreen> with SingleTickerProviderStat
                                 IconButton(
                                   icon: Icon(Icons.file_download,
                                   color: Colors.white,),
-                                  onPressed: () {
-                                    // Fluttertoast.showToast(
-                                    //   msg: 'Downloading image..',
-                                    //   toastLength: Toast.LENGTH_SHORT,
-                                    //   gravity: ToastGravity.BOTTOM
-                                    // );
-                                  },
+                                  onPressed: downloadImage,
                                 )
                               ],
                             )
