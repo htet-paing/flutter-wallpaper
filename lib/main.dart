@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hp_wallpaper/cubit/imageCubit/image_cubit.dart';
 import 'package:hp_wallpaper/reposities/image_repository.dart';
-import 'bloc/image/image_bloc.dart';
 import 'ui/screens/screens.dart';
 
 void main() {
+  Bloc.observer = ImageBlocObserver();
   runApp(MyApp());
 }
 
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ImageBloc>(
-          create: (context) => ImageBloc(repository: ImageRepository())..add(FetchImageEvent(imageType: 'photo'))
+        
+        BlocProvider<ImageCubit>(
+          create: (context) => ImageCubit(ImageRepository())..getImages('photo')
         )
       ],
       child: MaterialApp(
@@ -29,5 +31,30 @@ class MyApp extends StatelessWidget {
         home: HomeScreen(),
       ),
     );
+  }
+}
+
+class ImageBlocObserver extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object event) {
+    print(event);
+    super.onEvent(bloc, event);
+  }
+  @override
+  void onChange(Cubit cubit, Change change) {
+    print(change);
+    super.onChange(cubit, change);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    print(transition);
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
+    print('$error, $stackTrace');
+    super.onError(cubit, error, stackTrace);
   }
 }

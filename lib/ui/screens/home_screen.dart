@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_wallpaper/bloc/image/image_bloc.dart';
+import 'package:hp_wallpaper/cubit/imageCubit/image_cubit.dart';
 import 'package:hp_wallpaper/ui/widgets/widgets.dart';
-
 import 'screens.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,7 +33,14 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SearchScreen()
+                )
+              );
+            },
           )
         ],
       ),
@@ -46,15 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ImageTabScreen(),
             Expanded(
-              child: BlocBuilder<ImageBloc, ImageState>(        
+              child: BlocBuilder<ImageCubit, ImageState>(        
                   builder: (context, state){
                   if (state is ImageInitial){
                     return loading();
-                  }else if (state is ImageLoadingState){
+                  }else if (state is ImageLoading){
                     return loading();
-                  }else if (state is ImageLoadedState){
+                  }else if (state is ImageLoaded){
                     return ImageList(state.images);
-                  }else if (state is ImageErrorState){
+                  }else if (state is ImageError){
                     return NetworkError();
                   }  
                   return Container();       

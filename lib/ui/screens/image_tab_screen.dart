@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_wallpaper/bloc/image/image_bloc.dart';
+import 'package:hp_wallpaper/cubit/imageCubit/image_cubit.dart';
 
 class ImageTabScreen extends StatefulWidget {
   @override
@@ -9,10 +9,10 @@ class ImageTabScreen extends StatefulWidget {
 
 class _ImageTabScreenState extends State<ImageTabScreen> {
   int activeIndex = 0;
-  ImageBloc imageBloc;
+  ImageCubit imageCubit;
   @override
   Widget build(BuildContext context) {
-    imageBloc = BlocProvider.of<ImageBloc>(context);
+    imageCubit = BlocProvider.of<ImageCubit>(context);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -33,7 +33,7 @@ class _ImageTabScreenState extends State<ImageTabScreen> {
       vertical: 15.0),
       child: InkWell(
         onTap: () {
-          imageBloc.add(FetchImageEvent(imageType: imageType));
+          imageCubit.getImages(imageType);
           setState(() {
             activeIndex = index;
           });

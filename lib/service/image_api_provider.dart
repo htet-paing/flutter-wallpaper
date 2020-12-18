@@ -6,7 +6,8 @@ import 'package:hp_wallpaper/config/api_key.dart';
 
 class ImageApiProvider {
 
-  Future getImages(String imageType) async {
+
+  Future getImages({String imageType}) async {
     var url = baseUrl+ '?key=$apiKey&per_page=25&editors_choice=true&orientation=vertical&image_type=$imageType';
     try {
       final response = await http.get(url);
