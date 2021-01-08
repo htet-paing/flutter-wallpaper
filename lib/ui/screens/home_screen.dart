@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_wallpaper/cubit/imageCubit/image_cubit.dart';
+import 'package:hp_wallpaper/cubit/image_cubit.dart';
 import 'package:hp_wallpaper/ui/widgets/widgets.dart';
 import 'screens.dart';
 
@@ -34,12 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.search, color: Colors.white),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => SearchScreen()
-                )
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (_) => SearchScreen()
+              //   )
+              // );
             },
           )
         ],
@@ -56,11 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context, state){
                   if (state is ImageInitial){
                     return loading();
-                  }else if (state is ImageLoading){
+                  }else if (state is ImageLoadingState){
                     return loading();
-                  }else if (state is ImageLoaded){
+                  }else if (state is ImageLoadedState){
                     return ImageList(state.images);
-                  }else if (state is ImageError){
+                  }else if (state is ImageErrorState){
                     return NetworkError();
                   }  
                   return Container();       
