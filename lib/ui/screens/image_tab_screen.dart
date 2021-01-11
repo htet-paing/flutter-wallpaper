@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_wallpaper/cubit/image_cubit.dart';
+import 'package:hp_wallpaper/bloc/image/image_cubit.dart';
 
 class ImageTabScreen extends StatefulWidget {
   @override

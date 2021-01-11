@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hp_wallpaper/bloc/searchImage/searchimage_bloc.dart';
 import 'package:hp_wallpaper/reposities/image_repository.dart';
-import 'cubit/image_cubit.dart';
+import 'bloc/image/image_cubit.dart';
 import 'ui/screens/screens.dart';
 void main() {
   Bloc.observer = ImageBlocObserver();
@@ -13,10 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        
+      providers: [        
         BlocProvider<ImageCubit>(
           create: (context) => ImageCubit(ImageRepository())..getImages('photo')
+        ),
+        BlocProvider<SearchimageBloc>(
+          create: (context) => SearchimageBloc(ImageRepository())
         )
       ],
       child: MaterialApp(
