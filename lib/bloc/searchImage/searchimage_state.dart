@@ -1,27 +1,52 @@
 part of 'searchimage_bloc.dart';
 
-abstract class SearchimageState extends Equatable {
-  const SearchimageState();
-
-  @override
-  List<Object> get props => [];
+enum ImagesStatus {
+  searchImageInitial,
+  searchImageLoading,
+  searchImageLoaded,
+  searchImagePaginating,
+  searchImageNoMorePhotos,
+  searchImageError
 }
 
-class SearchimageInitial extends SearchimageState {}
-
-class SearchImageLoading extends SearchimageState {}
-
-class SearchImageLoaded extends SearchimageState {
+class SearchimageState extends Equatable {
+  final String query;
   final List<Hit> images;
-  SearchImageLoaded({this.images});
-  @override
-  List<Object> get props => [images];
-}
+  final ImagesStatus status;
+  final Failure failure;
 
-class SearchImageError extends SearchimageState {
-  final String message;
-  SearchImageError({this.message});
+  const SearchimageState({
+    @required this.query,
+    @required this.images,
+    @required this.status,
+    @required this.failure,
+  });
+
+  factory SearchimageState.initial() {
+    return SearchimageState(
+      query: '',
+      images: [],
+      status: ImagesStatus.searchImageInitial,
+      failure: null,
+    );
+  }
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [query, images, status, failure];
+
+  @override
+  bool get stringify => true;
+
+  SearchimageState copyWith({
+    String query,
+    List<Hit> images,
+    ImagesStatus status,
+    Failure failure,
+  }) {
+    return SearchimageState(
+        query: query ?? this.query,
+        images: images ?? this.images,
+        status: status ?? this.status,
+        failure: failure ?? this.failure);
+  }
 }

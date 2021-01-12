@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }else if (state is ImageLoadingState){
                     return loading();
                   }else if (state is ImageLoadedState){
-                    return ImageList(state.images);
+                    return ImageList(images: state.images);
                   }else if (state is ImageErrorState){
                     return NetworkError();
                   }  

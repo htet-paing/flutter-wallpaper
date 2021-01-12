@@ -9,7 +9,9 @@ abstract class SearchimageEvent extends Equatable {
 
 class SearchImages extends SearchimageEvent {
   final String query;
-  SearchImages({this.query});
+  SearchImages({@required this.query});
   @override
   List<Object> get props => [query];
 }
+
+class ImagesPaginate extends SearchimageEvent {}

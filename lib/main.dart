@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_wallpaper/bloc/searchImage/searchimage_bloc.dart';
-import 'package:hp_wallpaper/reposities/image_repository.dart';
 import 'bloc/image/image_cubit.dart';
+import 'repositories/repositories.dart';
 import 'ui/screens/screens.dart';
 void main() {
   Bloc.observer = ImageBlocObserver();
@@ -13,24 +13,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [        
-        BlocProvider<ImageCubit>(
-          create: (context) => ImageCubit(ImageRepository())..getImages('photo')
+    return RepositoryProvider(
+      create: (context) => ImageRepository(),
+          child: MultiBlocProvider(
+        providers: [        
+          BlocProvider<ImageCubit>(
+            create: (context) => ImageCubit(
+              imageRepository: context.read<ImageRepository>())..getImages('photo')
+          ),
+          BlocProvider<SearchimageBloc>(
+            create: (context) => SearchimageBloc(
+              imageRepository: context.read<ImageRepository>()
+            )
+          )
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'HP Wallpaper',
+          theme: ThemeData(
+            primaryColor: Colors.red,
+            accentColor: Colors.red,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: HomeScreen(),
         ),
-        BlocProvider<SearchimageBloc>(
-          create: (context) => SearchimageBloc(ImageRepository())
-        )
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'HP Wallpaper',
-        theme: ThemeData(
-          primaryColor: Colors.red,
-          accentColor: Colors.red,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: HomeScreen(),
       ),
     );
   }

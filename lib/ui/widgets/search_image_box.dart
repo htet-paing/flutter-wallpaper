@@ -42,11 +42,11 @@ class _SearchImgeBoxState extends State<SearchImgeBox> {
                   autofocus: true,
                   textInputAction: TextInputAction.search,
                   onFieldSubmitted: (value) {
-                    setState(() {
+                    if (value.trim().isNotEmpty) {
                       searchImageBloc =
                           BlocProvider.of<SearchimageBloc>(context);
                       searchImageBloc.add(SearchImages(query: textEditingController.text));
-                    });
+                    }
                   },
                   cursorColor: Color(0xFFdddddd),
                   style: TextStyle(

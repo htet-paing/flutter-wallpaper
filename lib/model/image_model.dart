@@ -1,32 +1,3 @@
-// class ImageModel {
-//   int totalHits;
-//   List<Hit> hits;
-//   int total;
-
-//   ImageModel({this.total, this.totalHits, this.hits});
-  
-//   factory ImageModel.fromJson(Map<String, dynamic> json) {
-//     var list = json['hits'] as List;
-//     List<Hit> hitList = list.map((i) => Hit.fromJson(i)).toList();
-//     return ImageModel(
-//       totalHits: json['totalHits'],
-//       hits: hitList,
-//       total: json['total']
-//     );
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['totalHits'] = this.totalHits;
-//     if (this.hits != null) {
-//       data['hits'] = this.hits.map((v) => v.toJson()).toList();
-//     }
-//     data['total'] = this.total;
-//     return data;
-//   }
-
-// }
-
 class Hit {
   String largeImageURL;
   int webformatHeight;

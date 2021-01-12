@@ -5,12 +5,14 @@ import 'widgets.dart';
 
 class ImageList extends StatelessWidget {
   final List<Hit> images;
-  ImageList(this.images);
+  final ScrollController controller;
+  ImageList({this.images, this.controller});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: StaggeredGridView.countBuilder(
+        controller: controller,
         crossAxisCount: 4,
         itemCount: images.length,
         itemBuilder: (BuildContext context, int index) {
