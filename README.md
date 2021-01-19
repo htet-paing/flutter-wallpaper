@@ -1,16 +1,31 @@
-# hp_wallpaper
+<h1 align="center">Flutter Wallpaper Application</h1>
+<div align="center">
+  <strong>Built with Flutter, Bloc, and APi from pixabay
+  </strong>
+</div>
 
-A new Flutter project.
+<br> Please star⭐ the repo if you like what you see😉.
 
-## Getting Started
+## 💻 Requirements
 
-This project is a starting point for a Flutter application.
+- Any Operating System (ie. MacOS X, Linux, Windows)
+- Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
+- A little knowledge of Dart and Flutter
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## 📸 ScreenShots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<!-- <img src="ss/mockup.png"/> -->
+<img src="ss/img1.jpg" width="400">  <img src="ss/img2.jpg" width="400">  <img src="ss/img3.jpg" width="400">
+
+| Dark                              | Light                             |
+| --------------------------------- | --------------------------------- |
+| <img src="ss/1.jpg" width="400">  | <img src="ss/2.jpg" width="400">  |
+| <img src="ss/3.jpg" width="400">  | <img src="ss/4.jpg" width="400">  |
+| <img src="ss/5.jpg" width="400">  | <img src="ss/6.jpg" width="400">  |
+| <img src="ss/7.jpg" width="400">  | <img src="ss/8.jpg" width="400">  |
+| <img src="ss/9.jpg" width="400">  | <img src="ss/10.jpg" width="400"> |
+| <img src="ss/11.jpg" width="400"> | <img src="ss/12.jpg" width="400"> |
+
+
+
