@@ -11,8 +11,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   ScrollController _scrollController;
 
-
-
   @override
   void initState() {
     super.initState();
@@ -47,7 +45,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         duration: Duration(seconds: 1),
                       ),
                     );
-                  } else if (state.status == ImagesStatus.searchImageNoMorePhotos) {
+                  } else if (state.status ==
+                      ImagesStatus.searchImageNoMorePhotos) {
                     Scaffold.of(context).showSnackBar(
                       const SnackBar(
                         backgroundColor: Colors.red,
@@ -71,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   }
                 },
-                builder: (context, state) {
+                builder: (context, state) {  
                   return Stack(
                     alignment: Alignment.center,
                     children: [
@@ -80,9 +79,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       : Center(
                             child: Text('No results.'),
                           ),
-                      if (state.status == ImagesStatus.searchImageLoading) 
+                      if (state.status == ImagesStatus.searchImageLoading)
                         loading()
-                      
+
                     ],
                   );
                 },
