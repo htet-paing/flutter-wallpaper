@@ -16,16 +16,11 @@
 ## 📸 ScreenShots
 
 <!-- <img src="ss/mockup.png"/> -->
-<img src="ss/img1.jpg" width="400">  <img src="ss/img2.jpg" width="400">  <img src="ss/img3.jpg" width="400">
 
-| Dark                              | Light                             |
-| --------------------------------- | --------------------------------- |
-| <img src="ss/1.jpg" width="400">  | <img src="ss/2.jpg" width="400">  |
-| <img src="ss/3.jpg" width="400">  | <img src="ss/4.jpg" width="400">  |
-| <img src="ss/5.jpg" width="400">  | <img src="ss/6.jpg" width="400">  |
-| <img src="ss/7.jpg" width="400">  | <img src="ss/8.jpg" width="400">  |
-| <img src="ss/9.jpg" width="400">  | <img src="ss/10.jpg" width="400"> |
-| <img src="ss/11.jpg" width="400"> | <img src="ss/12.jpg" width="400"> |
+                                                                          
+| ------------------------------------ | ------------------------------------ |
+| <img src="ss/img1.jpg" width="400">  | <img src="ss/img2.jpg" width="400">  |
+| <img src="ss/img3.jpg" width="400">  | <img src="ss/img1.jpg" width="400">  |
 
 
 
